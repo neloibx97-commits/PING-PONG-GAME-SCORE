@@ -1,0 +1,341 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #faecec;
+}
+
+#game-card {
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+  background-color: #f7d3d3;
+  border-radius: 9px;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* IMAGE */
+
+.game-image {
+  width: 100%;
+  height: 250px;
+  display: block;
+  object-fit: cover;
+}
+
+/* Content */
+
+.game-content {
+  padding: 20px;
+}
+
+/* Winner-message */
+
+.winner-message {
+  background: #d9f6e8;
+  border: 2px solid #16a34a;
+  box-shadow: 2px 3px 3px rgb(255, 160, 171);
+  border-radius: 9px;
+  color: #0b4a22;
+  font-size: 1.15rem;
+  font-weight: bold;
+  text-align: center;
+  max-height: 0;
+  padding: 0;
+  margin-bottom: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition:
+    opacity 0.5s ease,
+    max-height 0.5s ease,
+    padding 0.5s ease,
+    margin-bottom 0.5s ease;
+}
+
+.winner-message.show {
+  opacity: 1;
+  max-height: 80px;
+  padding: 12px;
+  margin-bottom: 20px;
+}
+
+/* Score */
+
+#p1Display,
+#p2Display {
+  font-size: 4.5rem;
+}
+
+h1 {
+  text-align: center;
+  font-size: 2.2rem;
+  color: #272727;
+  margin-bottom: 12px;
+}
+
+.game-content p {
+  color: #666;
+  font-size: 1.1rem;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Label */
+
+label {
+  display: inline-block;
+  margin-right: 8px;
+  font-size: 0.95rem;
+  font-weight: bold;
+  color: #524848;
+}
+
+/* Dropdown */
+
+#playto {
+  color: #4a3939;
+  width: 90px;
+  text-align: center;
+  padding: 9px 12px;
+  border: 2px solid #fdc2c2;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  background: #f9e9e9;
+}
+
+#playto:hover {
+  border-color: #ef476f;
+}
+
+#playto:focus {
+  outline: none;
+  border-color: #ef476f;
+  box-shadow: 0 2px 8px rgba(239, 71, 111, 0.5);
+}
+
+/* Buttons */
+
+#button-container {
+  display: flex;
+  gap: 14px;
+  padding: 0 15px 15px;
+}
+
+button {
+  flex: 1;
+
+  padding: 13px;
+  border: 1px solid rgb(250, 199, 153);
+  border-radius: 6px;
+  color: #eed9d9;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+
+  box-shadow: 1px 2px 3px rgb(42, 32, 33);
+
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+button:hover {
+  transform: translateY(-3px);
+  opacity: 0.9;
+}
+
+/* Player One */
+
+#p1Button {
+  background-color: #b13f3f;
+}
+
+#p1Button:hover {
+  background-color: #9d751f;
+}
+
+/* Player Two */
+#p2Button {
+  background-color: #2d82b7;
+}
+
+#p2Button:hover {
+  background-color: #96306b;
+}
+
+/* Reset */
+
+#reset {
+  background-color: #ef476f;
+}
+
+#reset:hover {
+  background-color: #0e333f;
+}
+
+.winner {
+  color: #16a34a;
+  animation: winnerGlow 1s ease-in-out infinite alternate;
+}
+
+.winner {
+  color: #16a34a;
+  font-weight: 900;
+  animation: winnerGlow 0.9s ease-in-out infinite alternate;
+}
+
+@keyframes winnerGlow {
+  from {
+    transform: scale(1);
+
+    text-shadow:
+      0 0 6px rgba(255, 215, 0, 0.6),
+      0 0 12px rgba(255, 215, 0, 0.5),
+      0 0 20px rgba(255, 215, 0, 0.3);
+  }
+
+  to {
+    transform: scale(1.12);
+
+    text-shadow:
+      0 0 10px rgba(255, 215, 0, 0.9),
+      0 0 22px rgba(255, 215, 0, 0.8),
+      0 0 35px rgba(255, 215, 0, 0.7),
+      0 0 50px rgba(255, 215, 0, 0.5);
+  }
+}
+
+#pingBall {
+  position: absolute;
+
+  top: 180px;
+
+  left: -50px;
+
+  font-size: 3rem;
+
+  opacity: 0;
+
+  pointer-events: none;
+}
+
+#pingBall.animate {
+  animation: ballBounce 6s ease-in-out forwards;
+}
+
+@keyframes ballBounce {
+  0% {
+    left: -50px;
+    top: 180px;
+    opacity: 1;
+  }
+
+  15% {
+    top: 150px;
+  }
+
+  30% {
+    top: 200px;
+  }
+
+  45% {
+    top: 140px;
+  }
+
+  60% {
+    top: 190px;
+  }
+
+  75% {
+    top: 145px;
+  }
+
+  100% {
+    left: 600px;
+    top: 190px;
+    opacity: 0;
+  }
+}
+
+/* =====================================
+   Tablet (768px and below)
+===================================== */
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 3.4rem;
+  }
+
+  .game-image {
+    height: 220px;
+  }
+}
+
+/* =====================================
+   Mobile (480px and below)
+===================================== */
+
+@media (max-width: 480px) {
+  body {
+    padding: 12px;
+  }
+
+  #game-card {
+    width: 100%;
+  }
+
+  .game-image {
+    height: 180px;
+  }
+
+  .game-content {
+    padding: 18px;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+  }
+
+  .game-content p {
+    font-size: 0.9rem;
+    margin-bottom: 16px;
+  }
+
+  label {
+    font-size: 0.9rem;
+  }
+
+  #playto {
+    width: 120px;
+    font-size: 0.95rem;
+    padding: 10px;
+  }
+
+  #button-container {
+    flex-direction: column;
+    gap: 10px;
+    padding: 0 15px 15px;
+  }
+
+  button {
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+  }
+
+  .winner-message {
+    font-size: 1rem;
+  }
+}
